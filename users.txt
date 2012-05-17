@@ -1,0 +1,2 @@
+prof|pass|1
+aluno|pass|2
