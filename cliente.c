@@ -232,7 +232,6 @@ int main(){
 		memset(packet, 0, sizeof packet);
 		sscanf(temp, "%s", temp);
 		strcat(packet, temp);
-		// fprintf(stderr, "\nPacket: %s\n", packet);
 		fprintf(stdout, "\n");
 		if(choice < 3 && choice > 0){
 			// Nao precisa de codigo da disciplina

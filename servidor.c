@@ -1,7 +1,3 @@
-/*
- * * server.c -- a stream socket server demo
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -594,11 +590,15 @@ int authenticate(char user[USER_MAXSIZE], char password[PASS_MAXSIZE]){
 
 	while(!feof(f)){
 		// Pega a linha e tenta pegar o user
+
 		if(fgets(line, 99, f) != NULL){
-			// fprintf(stdout, "\n%s\n", line);
+
+
 			curpos = line;
 			pch = strchr(line, '|');
+			memset(temp, 0, sizeof temp); 
 			memcpy(temp, line, pch-line);
+
 			if(strcmp(temp, user) == 0){
 				//Achou o usuario
 				memset(temp, 0, sizeof temp);
@@ -612,7 +612,6 @@ int authenticate(char user[USER_MAXSIZE], char password[PASS_MAXSIZE]){
 					pch = strchr(pch, '\0');
 					memset(temp, 0, sizeof temp);
 					memcpy(temp, curpos, pch-curpos);
-
 
 					if(temp[0]  == '1'){	
 						return 1;
@@ -636,7 +635,7 @@ void save_next_class_note(char cod[CODE_SIZE], char next_class[NEXT_CLASS_SIZE],
 
 	if(authenticate(user, pass) != PROFESOR){
 		// Envia mensagem de erro caso o usuario nao seja um professor
-		print(user, pass);
+
 		sprintf(to_send, "\nAcao permitida somente a professores\n");
 
 		//Para a contagem do tempo
@@ -789,7 +788,7 @@ int main(void)
 		totalReceivs++;
 
 		buf[numbytes] = '\0';
-		print("Buf", buf);
+
 
 		// Pega a opcao recebida
 		sscanf(buf, "%d", &choice);
@@ -800,7 +799,6 @@ int main(void)
 		}else if(choice > 2 && choice < 7){
 
 			//  Pega o codigo da disciplina na string que recebeu do socket
-			fprintf(stderr, "\nBuf: %s\n", buf);
 			pch = getCodeFromString(buf, &code);
 
 			if(choice == 6){
@@ -844,9 +842,8 @@ int main(void)
 		//Para a contagem do tempo
 		gettimeofday(&stop_time, NULL);
 		
-		//fprintf(stderr, "\nTempo quase final: %f\n", resul);
 		resul += (stop_time.tv_usec - start_time.tv_usec)/(float)MICRO_PER_SECOND;
-		//fprintf(stderr, "\nTempo final: %f\n", resul);
+
 		// Escreve no arquivo
 		FILE *f;
 		if((f = fopen("./servidor.txt", "a")) == NULL){
