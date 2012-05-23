@@ -278,10 +278,22 @@ int main(){
 
 	}
 
+	FILE *g;
+		if((g = fopen("./sentcliente.txt", "a")) == NULL){
+			fprintf(stderr, "Can't open file.\n\n\n");
+			exit(1);
+		};
 
+	FILE *d;
+		if((d = fopen("./receveidcliente.txt", "a")) == NULL){
+			fprintf(stderr, "Can't open file.\n\n\n");
+			exit(1);
+		};
 
-	printf("Sent: %d\n", totalSends);
-	printf("Rcvd: %d\n", totalRecvs);
+	fprintf(g, "%d\n", totalSends);
+	fclose(g);
+	fprintf(d, "%d\n", totalRecvs);
+	fclose(d);
 
 	return 0;
 

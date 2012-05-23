@@ -753,9 +753,6 @@ void save_next_class_note(char cod[CODE_SIZE], char next_class[NEXT_CLASS_SIZE],
 							   perror("talker: sendto");
 							   exit(1);
 						   }
-	//Reinicia a contagem do tempo
-				gettimeofday(&start_time, NULL);
-				totalSends++;
 	totalSends++;
 
 }
